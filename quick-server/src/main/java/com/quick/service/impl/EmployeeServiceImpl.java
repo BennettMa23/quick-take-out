@@ -1,5 +1,7 @@
 package com.quick.service.impl;
 
+import cn.hutool.crypto.digest.DigestUtil;
+import cn.hutool.crypto.digest.Digester;
 import com.quick.constant.MessageConstant;
 import com.quick.constant.StatusConstant;
 import com.quick.dto.EmployeeLoginDTO;
@@ -40,6 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //密码比对
         // TODO 后期需要进行md5加密，然后再进行比对
+        //前端传来密码进行国密SM3加密处理
+        Digester digester = DigestUtil.digester("sm3");
+        password = digester.digestHex(password.getBytes());
         if (!password.equals(employee.getPassword())) {
             //密码错误
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
