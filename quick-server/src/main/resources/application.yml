@@ -33,7 +33,7 @@ quick:
   jwt:
     # 设置jwt签名加密时使用的秘钥
     admin-secret-key: ueme
-    # 设置jwt过期时间
+    # 设置jwt过期时间  以下为毫秒  转换为 2小时
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token

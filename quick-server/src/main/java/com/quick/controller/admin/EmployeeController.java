@@ -3,8 +3,10 @@ package com.quick.controller.admin;
 import com.quick.constant.JwtClaimsConstant;
 import com.quick.dto.EmployeeDTO;
 import com.quick.dto.EmployeeLoginDTO;
+import com.quick.dto.EmployeePageQueryDTO;
 import com.quick.entity.Employee;
 import com.quick.properties.JwtProperties;
+import com.quick.result.PageResult;
 import com.quick.result.Result;
 import com.quick.service.EmployeeService;
 import com.quick.utils.JwtUtil;
@@ -13,10 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -91,5 +90,17 @@ public class EmployeeController {
         return Result.success();
     }
 
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
+    @GetMapping("/page")
+    @ApiOperation("员工分页查询")
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+        log.info("员工分页查询，参数为：{}", employeePageQueryDTO);
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
+        return Result.success(pageResult);
+    }
 
 }
