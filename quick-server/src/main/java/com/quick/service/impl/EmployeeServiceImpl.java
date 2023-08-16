@@ -3,7 +3,10 @@ package com.quick.service.impl;
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.Digester;
 import com.quick.constant.MessageConstant;
+import com.quick.constant.PasswordConstant;
 import com.quick.constant.StatusConstant;
+import com.quick.context.BaseContext;
+import com.quick.dto.EmployeeDTO;
 import com.quick.dto.EmployeeLoginDTO;
 import com.quick.entity.Employee;
 import com.quick.exception.AccountLockedException;
@@ -11,12 +14,16 @@ import com.quick.exception.AccountNotFoundException;
 import com.quick.exception.PasswordErrorException;
 import com.quick.mapper.EmployeeMapper;
 import com.quick.service.EmployeeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.time.LocalDateTime;
+
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class    EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeMapper employeeMapper;
@@ -41,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         //密码比对
-        // TODO 后期需要进行md5加密，然后再进行比对
+        // TODO 后期需要进行SM3加密，然后再进行比对
         //前端传来密码进行国密SM3加密处理
         Digester digester = DigestUtil.digester("sm3");
         password = digester.digestHex(password.getBytes());
@@ -57,6 +64,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //3、返回实体对象
         return employee;
+    }
+
+    /**
+     * 新增员工
+     * @param employeeDTO
+     */
+    public void save(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+//        employee.setName(employeeDTO.getName()); //太麻烦
+//        对象属性拷贝
+        BeanUtils.copyProperties(employeeDTO, employee);
+        //设置账号的状态，默认正常状态 1表示正常 0表示锁定
+        employee.setStatus(StatusConstant.ENABLE);
+
+        //设置密码，默认密码123456
+        Digester digester = DigestUtil.digester("sm3");
+        employee.setPassword(digester.digestHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
+
+        //设置当前记录的创建时间和修改时间
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+
+        //设置当前记录创建人id和修改人id
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        employeeMapper.insert(employee);
     }
 
 }

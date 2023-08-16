@@ -6,5 +6,5 @@ quick:
     database: quick_take_out
 #    url: jdbc:mysql://10.10.1.198:3306/quick_take_out?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
     username: root
-    password: 123123
+    password: 2oiigxii
 
