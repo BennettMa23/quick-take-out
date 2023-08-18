@@ -1,6 +1,7 @@
 package com.quick.mapper;
 
 import com.github.pagehelper.Page;
+import com.quick.annotation.AutoFill;
 import com.quick.enumeration.OperationType;
 import com.quick.dto.CategoryPageQueryDTO;
 import com.quick.entity.Category;
@@ -11,7 +12,6 @@ import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
-
     /**
      * 插入数据
      * @param category
@@ -19,6 +19,7 @@ public interface CategoryMapper {
     @Insert("insert into category(type, name, sort, status, create_time, update_time, create_user, update_user)" +
             " VALUES" +
             " (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
+    @AutoFill(value = OperationType.INSERT)
     void insert(Category category);
 
     /**
@@ -39,6 +40,7 @@ public interface CategoryMapper {
      * 根据id修改分类
      * @param category
      */
+    @AutoFill(value = OperationType.UPDATE)
     void update(Category category);
 
     /**
