@@ -46,6 +46,7 @@ public class CommonController {
      * @throws Exception
      */
     @GetMapping("/list")
+    @ApiOperation("文件查询")
     public List<Object> list() throws Exception {
 //        获得bucket列表
         Iterable<io.minio.Result<Item>> myObjects = minioClient.listObjects(
@@ -66,6 +67,7 @@ public class CommonController {
      * @param fileName
      */
     @RequestMapping("/download/{fileName}")
+    @ApiOperation("文件下载")
     public void download(HttpServletResponse response, @PathVariable("fileName") String fileName){
         InputStream in = null;
         try{
@@ -151,6 +153,7 @@ public class CommonController {
      * @return
      */
     @DeleteMapping("/delete/{fileName}")
+    @ApiOperation("文件删除")
     public Result delete(@PathVariable("fileName") String fileName) {
         try {
             minioClient.removeObject(

@@ -13,7 +13,9 @@ import com.quick.exception.DeletionNotAllowedException;
 import com.quick.mapper.DishFlavorMapper;
 import com.quick.mapper.DishMapper;
 //import com.quick.mapper.SetmealDishMapper;
+import com.quick.mapper.SetmealDishMapper;
 import com.quick.mapper.SetmealMapper;
+
 import com.quick.result.PageResult;
 import com.quick.service.DishService;
 import com.quick.vo.DishVO;
@@ -34,8 +36,8 @@ public class DishServiceImpl implements DishService {
     private DishMapper dishMapper;
     @Autowired
     private DishFlavorMapper dishFlavorMapper;
-//    @Autowired
-//    private SetmealDishMapper setmealDishMapper;
+    @Autowired
+    private SetmealDishMapper setmealDishMapper;
     @Autowired
     private SetmealMapper setmealMapper;
 
@@ -96,12 +98,12 @@ public class DishServiceImpl implements DishService {
             }
         }
 
-//        //判断当前菜品是否能够删除---是否被套餐关联了？？
-//        List<Long> setmealIds = setmealDishMapper.getSetmealIdsByDishIds(ids);
-//        if (setmealIds != null && setmealIds.size() > 0) {
-//            //当前菜品被套餐关联了，不能删除
-//            throw new DeletionNotAllowedException(MessageConstant.DISH_BE_RELATED_BY_SETMEAL);
-//        }
+        //判断当前菜品是否能够删除---是否被套餐关联了？？
+        List<Long> setmealIds = setmealDishMapper.getSetmealIdsByDishIds(ids);
+        if (setmealIds != null && setmealIds.size() > 0) {
+            //当前菜品被套餐关联了，不能删除
+            throw new DeletionNotAllowedException(MessageConstant.DISH_BE_RELATED_BY_SETMEAL);
+        }
 
         //删除菜品表中的菜品数据
         for (Long id : ids) {
