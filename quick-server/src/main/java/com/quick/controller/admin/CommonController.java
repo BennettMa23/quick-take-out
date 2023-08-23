@@ -107,10 +107,14 @@ public class CommonController {
 
         try {
             String orgfileName = file.getOriginalFilename();
+            //截取原始文件名的后缀     .png   .txt
+            String extension = orgfileName.substring(orgfileName.lastIndexOf("."));
+            //构造新文件名称 UUID
+            String objectName = UUID.randomUUID().toString() + extension;
             //文件上传
             InputStream in = file.getInputStream();
             minioClient.putObject(
-                    PutObjectArgs.builder().bucket(bucketName).object(orgfileName).stream(
+                    PutObjectArgs.builder().bucket(bucketName).object(objectName).stream(
                                     in, file.getSize(), -1)
                             .contentType(file.getContentType())
                             .build());
@@ -122,7 +126,7 @@ public class CommonController {
                     .append("/")
                     .append(bucketName)
                     .append("/")
-                    .append(orgfileName);
+                    .append(objectName);
 //            return Result.success(MessageConstant.);
             return Result.success(stringBuilder.toString());
 //            //原始文件名
