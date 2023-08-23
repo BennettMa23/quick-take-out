@@ -12,6 +12,11 @@ spring:
       url: jdbc:mysql://${quick.datasource.host}:${quick.datasource.port}/${quick.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${quick.datasource.username}
       password: ${quick.datasource.password}
+  # 配置文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 mybatis:
   #mapper配置文件
@@ -37,3 +42,8 @@ quick:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+  minio:
+    endpoint: http://10.10.1.198:9000
+    accessKey: admin
+    secretKey: admin123456
+    bucketName: quick-itcast
