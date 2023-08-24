@@ -4,7 +4,7 @@
 <mapper namespace="com.quick.mapper.SetmealMapper">
     <resultMap id="setmealAndDishMap" type="com.quick.vo.SetmealVO" autoMapping="true">
         <result column="id" property="id"/>
-        <collection property="setmealDishes" ofType="SetmealDish">
+        <collection property="setmealDishes" ofType="com.quick.entity.SetmealDish">
             <result column="sd_id" property="id"/>
             <result column="setmeal_id" property="setmealId"/>
             <result column="dish_id" property="dishId"/>
@@ -13,7 +13,7 @@
             <result column="copies" property="copies"/>
         </collection>
     </resultMap>
-    <update id="update" parameterType="Setmeal">
+    <update id="update" parameterType="com.quick.entity.Setmeal">
         update setmeal
         <set>
             <if test="name != null">
@@ -44,7 +44,8 @@
         where id = #{id}
     </update>
 
-    <insert id="insert" parameterType="Setmeal" useGeneratedKeys="true" keyProperty="id">
+<!--    表中id为主键  为自增   useGeneratedKeys="true" keyProperty="id"-->
+    <insert id="insert" parameterType="com.quick.entity.Setmeal" useGeneratedKeys="true" keyProperty="id">
         insert into setmeal
         (category_id, name, price, status, description, image, create_time, update_time, create_user, update_user)
         values (#{categoryId}, #{name}, #{price}, #{status}, #{description}, #{image}, #{createTime}, #{updateTime},
@@ -90,7 +91,7 @@
         where a.id = #{id}
     </select>
 
-    <select id="list" parameterType="Setmeal" resultType="Setmeal">
+    <select id="list" parameterType="com.quick.entity.Setmeal" resultType="com.quick.entity.Setmeal">
         select * from setmeal
         <where>
             <if test="name != null">
