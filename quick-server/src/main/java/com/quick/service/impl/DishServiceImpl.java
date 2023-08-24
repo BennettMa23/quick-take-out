@@ -141,7 +141,7 @@ public class DishServiceImpl implements DishService {
      */
     public void updateWithFlavor(DishDTO dishDTO) {
         Dish dish = new Dish();
-        BeanUtils.copyProperties(dishDTO, dish);
+        BeanUtils.copyProperties(dishDTO, dish); //dishDTO 拷贝到 dish对象
 
         //修改菜品表基本信息
         dishMapper.update(dish);
