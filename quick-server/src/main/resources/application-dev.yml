@@ -7,4 +7,10 @@ quick:
 #    url: jdbc:mysql://10.10.1.198:3306/quick_take_out?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
     username: root
     password: 2oiigxii
+  redis:
+    host: 10.10.1.198
+    port: 6379
+#    password: 123456
+#    使用redis中10号DB（数据库10）  默认DB0
+    database: 10
 

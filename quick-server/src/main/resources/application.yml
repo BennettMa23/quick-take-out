@@ -12,11 +12,17 @@ spring:
       url: jdbc:mysql://${quick.datasource.host}:${quick.datasource.port}/${quick.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${quick.datasource.username}
       password: ${quick.datasource.password}
+  redis:
+    host: ${quick.redis.host}
+    port: ${quick.redis.port}
+    password: ${quick.redis.password}
+    database: ${quick.redis.database}
   # 配置文件上传大小限制
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+
 
 mybatis:
   #mapper配置文件
