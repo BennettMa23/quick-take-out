@@ -48,8 +48,27 @@ quick:
     admin-ttl: 36000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+
+    user-secret-key: ueme
+    user-ttl: 7200000
+    user-token-name: authentication
   minio:
     endpoint: http://10.10.1.198:9000
     accessKey: admin
     secretKey: admin123456
     bucketName: quick-itcast
+  wechat:
+    appid: ${quick.wechat.appid}
+    secret: ${quick.wechat.secret}
+    mchid: ${quick.wechat.mchid}
+    mchSerialNo: ${quick.wechat.mchSerialNo}
+    privateKeyFilePath: ${quick.wechat.privateKeyFilePath}
+    apiV3Key: ${quick.wechat.apiV3Key}
+    weChatPayCertFilePath: ${quick.wechat.weChatPayCertFilePath}
+    notifyUrl: ${quick.wechat.notifyUrl}
+    refundNotifyUrl: ${quick.wechat.refundNotifyUrl}
+    shop:
+      address: 广州市黄埔区经济开发区青年路461号
+    baidu:
+      ak: your-ak
+
