@@ -32,8 +32,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ReportServiceImpl implements ReportService {
 
-//    @Autowired
-//    private OrderMapper orderMapper;
+    @Autowired
+    private OrderMapper orderMapper;
     @Autowired
     private UserMapper userMapper;
     @Autowired

@@ -1,7 +1,7 @@
 package com.quick.task;
 
 import com.quick.entity.Orders;
-//import com.quick.mapper.OrderMapper;
+import com.quick.mapper.OrderMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -49,7 +49,7 @@ public class OrderTask {
         log.info("定时处理处于派送中的订单：{}",LocalDateTime.now());
 
         LocalDateTime time = LocalDateTime.now().plusMinutes(-60);
-
+//        查上一天一直处于派送中订单
         List<Orders> ordersList = orderMapper.getByStatusAndOrderTimeLT(Orders.DELIVERY_IN_PROGRESS, time);
 
         if(ordersList != null && ordersList.size() > 0){

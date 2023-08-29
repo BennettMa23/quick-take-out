@@ -57,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private WebSocketServer webSocketServer;
 
+
     /**
      * 用户下单
      * @param ordersSubmitDTO
@@ -73,7 +74,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         //检查用户的收货地址是否超出配送范围
-        //checkOutOfRange(addressBook.getCityName() + addressBook.getDistrictName() + addressBook.getDetail());
+        checkOutOfRange(addressBook.getCityName() + addressBook.getDistrictName() + addressBook.getDetail());
 
         //查询当前用户的购物车数据
         Long userId = BaseContext.getCurrentId();
@@ -125,6 +126,8 @@ public class OrderServiceImpl implements OrderService {
 
         return orderSubmitVO;
     }
+
+
 
     @Value("${quick.shop.address}")
     private String shopAddress;
