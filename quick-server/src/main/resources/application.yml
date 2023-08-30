@@ -67,8 +67,8 @@ quick:
     weChatPayCertFilePath: ${quick.wechat.weChatPayCertFilePath}
     notifyUrl: ${quick.wechat.notifyUrl}
     refundNotifyUrl: ${quick.wechat.refundNotifyUrl}
-    shop:
-      address: 广州市黄埔区经济开发区青年路461号
-    baidu:
-      ak: UEBQm9chjdhjsbd673eyahj
+  shop:
+    address: 广州市黄埔区经济开发区青年路461号
+  baidu:
+    ak: UEBQm9chjdhjsbd673eyahj
 

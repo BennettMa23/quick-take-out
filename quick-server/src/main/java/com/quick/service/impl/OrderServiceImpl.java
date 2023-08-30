@@ -129,11 +129,13 @@ public class OrderServiceImpl implements OrderService {
 
 
 
+
     @Value("${quick.shop.address}")
     private String shopAddress;
 
     @Value("${quick.baidu.ak}")
     private String ak;
+
 
     /**
      * 检查客户的收货地址是否超出配送范围
